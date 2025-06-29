@@ -2,10 +2,13 @@ from random import randint
 
 
 class Deck:
-    def __init__(self):
-        self.ranks = ["ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "jack", "queen", "king"]
-        self.suits = ["clubs", "spades", "diamonds", "hearts"]
-        self.cards = [(rank, suit) for rank in self.ranks for suit in self.suits]
+    def __init__(self, deck=None):
+        if deck == None:
+            self.ranks = ["ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "jack", "queen", "king"]
+            self.suits = ["clubs", "spades", "diamonds", "hearts"]
+            self.cards = [(rank, suit) for rank in self.ranks for suit in self.suits]
+        else:
+            self.cards = deck
 
     # print the deck
     def print_deck(self):
@@ -14,8 +17,8 @@ class Deck:
 
     # shuffle the deck
     def shuffle(self):
-        for i in range(52):
-            random_place = randint(0, 51)
+        for i in range(len(self.cards)):
+            random_place = randint(0, len(self.cards) - 1)
             tmp = self.cards[i]
             self.cards[i] = self.cards[random_place]
             self.cards[random_place] = tmp
